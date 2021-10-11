@@ -7,8 +7,9 @@ File myFile;
 unsigned long previousMillis_Save = 0;
 unsigned long Time = 0;
 int saveState = 0;
-String dataLog[6][10];
-
+String dataLog[6][100];
+int CountSave = 0;
+int pos = 0;
 float accX = 0.0F;
 float accY = 0.0F;
 float accZ = 0.0F;
@@ -24,7 +25,8 @@ float yaw   = 0.0F;
 
 
 // the setup routine runs once when M5Stack starts up
-void setup() {
+void setup() 
+{
 
   // Initialize the M5Stack object
   
@@ -32,7 +34,8 @@ void setup() {
   Wire.begin();
   M5.Power.begin();
   M5.IMU.Init();
-  if (!SD.begin(4)) {
+  if (!SD.begin(4)) 
+  {
     Serial.println("initialization failed!");
     while (1);
   }
@@ -42,7 +45,8 @@ void setup() {
 }
 
 // the loop routine runs over and over again forever
-void loop() {
+void loop() 
+{
   unsigned long currentMillis = millis();
   M5.update();
   // put your main code here, to run repeatedly:
@@ -64,112 +68,185 @@ void loop() {
   M5.Lcd.setCursor(220, 132);
   M5.Lcd.print(" degree");
 
-  if (M5.BtnA.wasReleased() && saveState == 0) {
+  if (M5.BtnA.wasReleased() && saveState == 0) 
+  {
     saveState = 1;
     previousMillis_Save = currentMillis;
     Time = currentMillis;
   }
-  if (saveState == 1) {
+  if (saveState == 1) 
+  {
     M5.Lcd.setTextColor(WHITE , BLACK);
     M5.Lcd.setCursor(20, 220);
     M5.Lcd.print(Time);
-    if ((currentMillis - previousMillis_Save) >= 5000 && (currentMillis - previousMillis_Save) <= 5000 + 50) {
-      dataLog[0][0] = accX;
-      dataLog[1][0] = accY;
-      dataLog[2][0] = accZ;
-      dataLog[3][0] = gyroX;
-      dataLog[4][0] = gyroY;
-      dataLog[5][0] = gyroZ;
-    } else if ((currentMillis - previousMillis_Save) >= 5050 && (currentMillis - previousMillis_Save) <= 5050 + 50) {
-      dataLog[0][1] = accX;
-      dataLog[1][1] = accY;
-      dataLog[2][1] = accZ;
-      dataLog[3][1] = gyroX;
-      dataLog[4][1] = gyroY;
-      dataLog[5][1] = gyroZ;
-    } else if ((currentMillis - previousMillis_Save) >= 5100 && (currentMillis - previousMillis_Save) <= 5100 + 50) {
-      dataLog[0][2] = accX;
-      dataLog[1][2] = accY;
-      dataLog[2][2] = accZ;
-      dataLog[3][2] = gyroX;
-      dataLog[4][2] = gyroY;
-      dataLog[5][2] = gyroZ;
-    } else if ((currentMillis - previousMillis_Save) >= 5150 && (currentMillis - previousMillis_Save) <= 5150 + 50) {
-      dataLog[0][3] = accX;
-      dataLog[1][3] = accY;
-      dataLog[2][3] = accZ;
-      dataLog[3][3] = gyroX;
-      dataLog[4][3] = gyroY;
-      dataLog[5][3] = gyroZ;
-    } else if ((currentMillis - previousMillis_Save) >= 5200 && (currentMillis - previousMillis_Save) <= 5200 + 50) {
-      dataLog[0][4] = accX;
-      dataLog[1][4] = accY;
-      dataLog[2][4] = accZ;
-      dataLog[3][4] = gyroX;
-      dataLog[4][4] = gyroY;
-      dataLog[5][4] = gyroZ;
-    } else if ((currentMillis - previousMillis_Save) >= 5250 && (currentMillis - previousMillis_Save) <= 5250 + 50) {
-      dataLog[0][5] = accX;
-      dataLog[1][5] = accY;
-      dataLog[2][5] = accZ;
-      dataLog[3][5] = gyroX;
-      dataLog[4][5] = gyroY;
-      dataLog[5][5] = gyroZ;
-    } else if ((currentMillis - previousMillis_Save) >= 5300 && (currentMillis - previousMillis_Save) <= 5300 + 50) {
-      dataLog[0][6] = accX;
-      dataLog[1][6] = accY;
-      dataLog[2][6] = accZ;
-      dataLog[3][6] = gyroX;
-      dataLog[4][6] = gyroY;
-      dataLog[5][6] = gyroZ;
-    } else if ((currentMillis - previousMillis_Save) >= 5350 && (currentMillis - previousMillis_Save) <= 5350 + 50) {
-      dataLog[0][7] = accX;
-      dataLog[1][7] = accY;
-      dataLog[2][7] = accZ;
-      dataLog[3][7] = gyroX;
-      dataLog[4][7] = gyroY;
-      dataLog[5][7] = gyroZ;
-    } else if ((currentMillis - previousMillis_Save) >= 5400 && (currentMillis - previousMillis_Save) <= 5400 + 50) {
-      dataLog[0][8] = accX;
-      dataLog[1][8] = accY;
-      dataLog[2][8] = accZ;
-      dataLog[3][8] = gyroX;
-      dataLog[4][8] = gyroY;
-      dataLog[5][8] = gyroZ;
-    } else if ((currentMillis - previousMillis_Save) >= 5450 && (currentMillis - previousMillis_Save) <= 5450 + 50) {
-      dataLog[0][9] = accX;
-      dataLog[1][9] = accY;
-      dataLog[2][9] = accZ;
-      dataLog[3][9] = gyroX;
-      dataLog[4][9] = gyroY;
-      dataLog[5][9] = gyroZ;
-      saveState = 2;
+    M5.Lcd.setTextColor(WHITE , BLACK);
+    M5.Lcd.setCursor(100, 220);
+    M5.Lcd.print(CountSave);
+    if ((currentMillis - previousMillis_Save) >= 50 ) 
+    {
+      dataLog[0][CountSave] = accX;
+      dataLog[1][CountSave] = accY;
+      dataLog[2][CountSave] = accZ;
+      dataLog[3][CountSave] = gyroX;
+      dataLog[4][CountSave] = gyroY;
+      dataLog[5][CountSave] = gyroZ;
+      CountSave++;
+      if (M5.BtnA.wasReleased() && saveState == 1) 
+      {
+        M5.Lcd.setTextColor(WHITE , BLACK);
+        M5.Lcd.setCursor(100, 220);
+        M5.Lcd.print("Writing..");
+        saveState = 2;        
+      }
+      if(CountSave > 99)
+      {
+        M5.Lcd.setTextColor(WHITE , BLACK);
+        M5.Lcd.setCursor(100, 220);
+        M5.Lcd.print("Writing..");
+        saveState = 2;
+      }
+      previousMillis_Save = currentMillis;
     }
   }
-   if (saveState == 2) {
+   if (saveState == 2) 
+   {
     myFile = SD.open("/data.txt", FILE_WRITE);
-    if (myFile) {
+    if (myFile) 
+    {
       Serial.print("Writing...");
-      myFile.println("Accel  X" + dataLog[0][0] + " " +  "Y" + dataLog[1][0] + " " + "Z" + dataLog[2][0] + " " + "GYRO" + " " + "X" + dataLog[3][0] + " " + "Y" + dataLog[4][0] + " " + "Z" + dataLog[5][0]);
-      myFile.println("Accel  X" + dataLog[0][1] + " " +  "Y" + dataLog[1][1] + " " + "Z" + dataLog[2][1] + " " + "GYRO" + " " + "X" + dataLog[3][1] + " " + "Y" + dataLog[4][1] + " " + "Z" + dataLog[5][1]);
-      myFile.println("Accel  X" + dataLog[0][2] + " " +  "Y" + dataLog[1][2] + " " + "Z" + dataLog[2][2] + " " + "GYRO" + " " + "X" + dataLog[3][2] + " " + "Y" + dataLog[4][2] + " " + "Z" + dataLog[5][2]);
-      myFile.println("Accel  X" + dataLog[0][3] + " " +  "Y" + dataLog[1][3] + " " + "Z" + dataLog[2][3] + " " + "GYRO" + " " + "X" + dataLog[3][3] + " " + "Y" + dataLog[4][3] + " " + "Z" + dataLog[5][3]);
-      myFile.println("Accel  X" + dataLog[0][4] + " " +  "Y" + dataLog[1][4] + " " + "Z" + dataLog[2][4] + " " + "GYRO" + " " + "X" + dataLog[3][4] + " " + "Y" + dataLog[4][4] + " " + "Z" + dataLog[5][4]);
-      myFile.println("Accel  X" + dataLog[0][5] + " " +  "Y" + dataLog[1][5] + " " + "Z" + dataLog[2][5] + " " + "GYRO" + " " + "X" + dataLog[3][5] + " " + "Y" + dataLog[4][5] + " " + "Z" + dataLog[5][5]);
-      myFile.println("Accel  X" + dataLog[0][6] + " " +  "Y" + dataLog[1][6] + " " + "Z" + dataLog[2][6] + " " + "GYRO" + " " + "X" + dataLog[3][6] + " " + "Y" + dataLog[4][6] + " " + "Z" + dataLog[5][6]);
-      myFile.println("Accel  X" + dataLog[0][7] + " " +  "Y" + dataLog[1][7] + " " + "Z" + dataLog[2][7] + " " + "GYRO" + " " + "X" + dataLog[3][7] + " " + "Y" + dataLog[4][7] + " " + "Z" + dataLog[5][7]);
-      myFile.println("Accel  X" + dataLog[0][8] + " " +  "Y" + dataLog[1][8] + " " + "Z" + dataLog[2][8] + " " + "GYRO" + " " + "X" + dataLog[3][8] + " " + "Y" + dataLog[4][8] + " " + "Z" + dataLog[5][8]);
-      myFile.println("Accel  X" + dataLog[0][9] + " " +  "Y" + dataLog[1][9] + " " + "Z" + dataLog[2][9] + " " + "GYRO" + " " + "X" + dataLog[3][9] + " " + "Y" + dataLog[4][9] + " " + "Z" + dataLog[5][9]);
-      
+      myFile.println(dataLog[0][pos+0] + " "  + dataLog[1][pos+0] + " "  + dataLog[2][pos+0] + " " +  dataLog[3][pos+0] + " "  + dataLog[4][pos+0] + " "  + dataLog[5][pos+0]);
+      myFile.println(dataLog[0][pos+1] + " "  + dataLog[1][pos+1] + " "  + dataLog[2][pos+1] + " " +  dataLog[3][pos+1] + " "  + dataLog[4][pos+1] + " "  + dataLog[5][pos+1]);
+      myFile.println(dataLog[0][pos+2] + " "  + dataLog[1][pos+2] + " "  + dataLog[2][pos+2] + " " +  dataLog[3][pos+2] + " "  + dataLog[4][pos+2] + " "  + dataLog[5][pos+2]);
+      myFile.println(dataLog[0][pos+3] + " "  + dataLog[1][pos+3] + " "  + dataLog[2][pos+3] + " " +  dataLog[3][pos+3] + " "  + dataLog[4][pos+3] + " "  + dataLog[5][pos+3]);
+      myFile.println(dataLog[0][pos+4] + " "  + dataLog[1][pos+4] + " "  + dataLog[2][pos+4] + " " +  dataLog[3][pos+4] + " "  + dataLog[4][pos+4] + " "  + dataLog[5][pos+4]);
+      myFile.println(dataLog[0][pos+5] + " "  + dataLog[1][pos+5] + " "  + dataLog[2][pos+5] + " " +  dataLog[3][pos+5] + " "  + dataLog[4][pos+5] + " "  + dataLog[5][pos+5]);
+      myFile.println(dataLog[0][pos+6] + " "  + dataLog[1][pos+6] + " "  + dataLog[2][pos+6] + " " +  dataLog[3][pos+6] + " "  + dataLog[4][pos+6] + " "  + dataLog[5][pos+6]);
+      myFile.println(dataLog[0][pos+7] + " "  + dataLog[1][pos+7] + " "  + dataLog[2][pos+7] + " " +  dataLog[3][pos+7] + " "  + dataLog[4][pos+7] + " "  + dataLog[5][pos+7]);
+      myFile.println(dataLog[0][pos+8] + " "  + dataLog[1][pos+8] + " "  + dataLog[2][pos+8] + " " +  dataLog[3][pos+8] + " "  + dataLog[4][pos+8] + " "  + dataLog[5][pos+8]);
+      myFile.println(dataLog[0][pos+9] + " "  + dataLog[1][pos+9] + " "  + dataLog[2][pos+9] + " " +  dataLog[3][pos+9] + " "  + dataLog[4][pos+9] + " "  + dataLog[5][pos+9]);
+
+      pos = 10;
+      myFile.println(dataLog[0][pos+0] + " "  + dataLog[1][pos+0] + " "  + dataLog[2][pos+0] + " " +  dataLog[3][pos+0] + " "  + dataLog[4][pos+0] + " "  + dataLog[5][pos+0]);
+      myFile.println(dataLog[0][pos+1] + " "  + dataLog[1][pos+1] + " "  + dataLog[2][pos+1] + " " +  dataLog[3][pos+1] + " "  + dataLog[4][pos+1] + " "  + dataLog[5][pos+1]);
+      myFile.println(dataLog[0][pos+2] + " "  + dataLog[1][pos+2] + " "  + dataLog[2][pos+2] + " " +  dataLog[3][pos+2] + " "  + dataLog[4][pos+2] + " "  + dataLog[5][pos+2]);
+      myFile.println(dataLog[0][pos+3] + " "  + dataLog[1][pos+3] + " "  + dataLog[2][pos+3] + " " +  dataLog[3][pos+3] + " "  + dataLog[4][pos+3] + " "  + dataLog[5][pos+3]);
+      myFile.println(dataLog[0][pos+4] + " "  + dataLog[1][pos+4] + " "  + dataLog[2][pos+4] + " " +  dataLog[3][pos+4] + " "  + dataLog[4][pos+4] + " "  + dataLog[5][pos+4]);
+      myFile.println(dataLog[0][pos+5] + " "  + dataLog[1][pos+5] + " "  + dataLog[2][pos+5] + " " +  dataLog[3][pos+5] + " "  + dataLog[4][pos+5] + " "  + dataLog[5][pos+5]);
+      myFile.println(dataLog[0][pos+6] + " "  + dataLog[1][pos+6] + " "  + dataLog[2][pos+6] + " " +  dataLog[3][pos+6] + " "  + dataLog[4][pos+6] + " "  + dataLog[5][pos+6]);
+      myFile.println(dataLog[0][pos+7] + " "  + dataLog[1][pos+7] + " "  + dataLog[2][pos+7] + " " +  dataLog[3][pos+7] + " "  + dataLog[4][pos+7] + " "  + dataLog[5][pos+7]);
+      myFile.println(dataLog[0][pos+8] + " "  + dataLog[1][pos+8] + " "  + dataLog[2][pos+8] + " " +  dataLog[3][pos+8] + " "  + dataLog[4][pos+8] + " "  + dataLog[5][pos+8]);
+      myFile.println(dataLog[0][pos+9] + " "  + dataLog[1][pos+9] + " "  + dataLog[2][pos+9] + " " +  dataLog[3][pos+9] + " "  + dataLog[4][pos+9] + " "  + dataLog[5][pos+9]);
+
+      pos = 20;
+      myFile.println(dataLog[0][pos+0] + " "  + dataLog[1][pos+0] + " "  + dataLog[2][pos+0] + " " +  dataLog[3][pos+0] + " "  + dataLog[4][pos+0] + " "  + dataLog[5][pos+0]);
+      myFile.println(dataLog[0][pos+1] + " "  + dataLog[1][pos+1] + " "  + dataLog[2][pos+1] + " " +  dataLog[3][pos+1] + " "  + dataLog[4][pos+1] + " "  + dataLog[5][pos+1]);
+      myFile.println(dataLog[0][pos+2] + " "  + dataLog[1][pos+2] + " "  + dataLog[2][pos+2] + " " +  dataLog[3][pos+2] + " "  + dataLog[4][pos+2] + " "  + dataLog[5][pos+2]);
+      myFile.println(dataLog[0][pos+3] + " "  + dataLog[1][pos+3] + " "  + dataLog[2][pos+3] + " " +  dataLog[3][pos+3] + " "  + dataLog[4][pos+3] + " "  + dataLog[5][pos+3]);
+      myFile.println(dataLog[0][pos+4] + " "  + dataLog[1][pos+4] + " "  + dataLog[2][pos+4] + " " +  dataLog[3][pos+4] + " "  + dataLog[4][pos+4] + " "  + dataLog[5][pos+4]);
+      myFile.println(dataLog[0][pos+5] + " "  + dataLog[1][pos+5] + " "  + dataLog[2][pos+5] + " " +  dataLog[3][pos+5] + " "  + dataLog[4][pos+5] + " "  + dataLog[5][pos+5]);
+      myFile.println(dataLog[0][pos+6] + " "  + dataLog[1][pos+6] + " "  + dataLog[2][pos+6] + " " +  dataLog[3][pos+6] + " "  + dataLog[4][pos+6] + " "  + dataLog[5][pos+6]);
+      myFile.println(dataLog[0][pos+7] + " "  + dataLog[1][pos+7] + " "  + dataLog[2][pos+7] + " " +  dataLog[3][pos+7] + " "  + dataLog[4][pos+7] + " "  + dataLog[5][pos+7]);
+      myFile.println(dataLog[0][pos+8] + " "  + dataLog[1][pos+8] + " "  + dataLog[2][pos+8] + " " +  dataLog[3][pos+8] + " "  + dataLog[4][pos+8] + " "  + dataLog[5][pos+8]);
+      myFile.println(dataLog[0][pos+9] + " "  + dataLog[1][pos+9] + " "  + dataLog[2][pos+9] + " " +  dataLog[3][pos+9] + " "  + dataLog[4][pos+9] + " "  + dataLog[5][pos+9]);
+
+      pos = 30;
+      myFile.println(dataLog[0][pos+0] + " "  + dataLog[1][pos+0] + " "  + dataLog[2][pos+0] + " " +  dataLog[3][pos+0] + " "  + dataLog[4][pos+0] + " "  + dataLog[5][pos+0]);
+      myFile.println(dataLog[0][pos+1] + " "  + dataLog[1][pos+1] + " "  + dataLog[2][pos+1] + " " +  dataLog[3][pos+1] + " "  + dataLog[4][pos+1] + " "  + dataLog[5][pos+1]);
+      myFile.println(dataLog[0][pos+2] + " "  + dataLog[1][pos+2] + " "  + dataLog[2][pos+2] + " " +  dataLog[3][pos+2] + " "  + dataLog[4][pos+2] + " "  + dataLog[5][pos+2]);
+      myFile.println(dataLog[0][pos+3] + " "  + dataLog[1][pos+3] + " "  + dataLog[2][pos+3] + " " +  dataLog[3][pos+3] + " "  + dataLog[4][pos+3] + " "  + dataLog[5][pos+3]);
+      myFile.println(dataLog[0][pos+4] + " "  + dataLog[1][pos+4] + " "  + dataLog[2][pos+4] + " " +  dataLog[3][pos+4] + " "  + dataLog[4][pos+4] + " "  + dataLog[5][pos+4]);
+      myFile.println(dataLog[0][pos+5] + " "  + dataLog[1][pos+5] + " "  + dataLog[2][pos+5] + " " +  dataLog[3][pos+5] + " "  + dataLog[4][pos+5] + " "  + dataLog[5][pos+5]);
+      myFile.println(dataLog[0][pos+6] + " "  + dataLog[1][pos+6] + " "  + dataLog[2][pos+6] + " " +  dataLog[3][pos+6] + " "  + dataLog[4][pos+6] + " "  + dataLog[5][pos+6]);
+      myFile.println(dataLog[0][pos+7] + " "  + dataLog[1][pos+7] + " "  + dataLog[2][pos+7] + " " +  dataLog[3][pos+7] + " "  + dataLog[4][pos+7] + " "  + dataLog[5][pos+7]);
+      myFile.println(dataLog[0][pos+8] + " "  + dataLog[1][pos+8] + " "  + dataLog[2][pos+8] + " " +  dataLog[3][pos+8] + " "  + dataLog[4][pos+8] + " "  + dataLog[5][pos+8]);
+      myFile.println(dataLog[0][pos+9] + " "  + dataLog[1][pos+9] + " "  + dataLog[2][pos+9] + " " +  dataLog[3][pos+9] + " "  + dataLog[4][pos+9] + " "  + dataLog[5][pos+9]);
+
+      pos = 40;
+      myFile.println(dataLog[0][pos+0] + " "  + dataLog[1][pos+0] + " "  + dataLog[2][pos+0] + " " +  dataLog[3][pos+0] + " "  + dataLog[4][pos+0] + " "  + dataLog[5][pos+0]);
+      myFile.println(dataLog[0][pos+1] + " "  + dataLog[1][pos+1] + " "  + dataLog[2][pos+1] + " " +  dataLog[3][pos+1] + " "  + dataLog[4][pos+1] + " "  + dataLog[5][pos+1]);
+      myFile.println(dataLog[0][pos+2] + " "  + dataLog[1][pos+2] + " "  + dataLog[2][pos+2] + " " +  dataLog[3][pos+2] + " "  + dataLog[4][pos+2] + " "  + dataLog[5][pos+2]);
+      myFile.println(dataLog[0][pos+3] + " "  + dataLog[1][pos+3] + " "  + dataLog[2][pos+3] + " " +  dataLog[3][pos+3] + " "  + dataLog[4][pos+3] + " "  + dataLog[5][pos+3]);
+      myFile.println(dataLog[0][pos+4] + " "  + dataLog[1][pos+4] + " "  + dataLog[2][pos+4] + " " +  dataLog[3][pos+4] + " "  + dataLog[4][pos+4] + " "  + dataLog[5][pos+4]);
+      myFile.println(dataLog[0][pos+5] + " "  + dataLog[1][pos+5] + " "  + dataLog[2][pos+5] + " " +  dataLog[3][pos+5] + " "  + dataLog[4][pos+5] + " "  + dataLog[5][pos+5]);
+      myFile.println(dataLog[0][pos+6] + " "  + dataLog[1][pos+6] + " "  + dataLog[2][pos+6] + " " +  dataLog[3][pos+6] + " "  + dataLog[4][pos+6] + " "  + dataLog[5][pos+6]);
+      myFile.println(dataLog[0][pos+7] + " "  + dataLog[1][pos+7] + " "  + dataLog[2][pos+7] + " " +  dataLog[3][pos+7] + " "  + dataLog[4][pos+7] + " "  + dataLog[5][pos+7]);
+      myFile.println(dataLog[0][pos+8] + " "  + dataLog[1][pos+8] + " "  + dataLog[2][pos+8] + " " +  dataLog[3][pos+8] + " "  + dataLog[4][pos+8] + " "  + dataLog[5][pos+8]);
+      myFile.println(dataLog[0][pos+9] + " "  + dataLog[1][pos+9] + " "  + dataLog[2][pos+9] + " " +  dataLog[3][pos+9] + " "  + dataLog[4][pos+9] + " "  + dataLog[5][pos+9]);
+
+      pos = 50;
+      myFile.println(dataLog[0][pos+0] + " "  + dataLog[1][pos+0] + " "  + dataLog[2][pos+0] + " " +  dataLog[3][pos+0] + " "  + dataLog[4][pos+0] + " "  + dataLog[5][pos+0]);
+      myFile.println(dataLog[0][pos+1] + " "  + dataLog[1][pos+1] + " "  + dataLog[2][pos+1] + " " +  dataLog[3][pos+1] + " "  + dataLog[4][pos+1] + " "  + dataLog[5][pos+1]);
+      myFile.println(dataLog[0][pos+2] + " "  + dataLog[1][pos+2] + " "  + dataLog[2][pos+2] + " " +  dataLog[3][pos+2] + " "  + dataLog[4][pos+2] + " "  + dataLog[5][pos+2]);
+      myFile.println(dataLog[0][pos+3] + " "  + dataLog[1][pos+3] + " "  + dataLog[2][pos+3] + " " +  dataLog[3][pos+3] + " "  + dataLog[4][pos+3] + " "  + dataLog[5][pos+3]);
+      myFile.println(dataLog[0][pos+4] + " "  + dataLog[1][pos+4] + " "  + dataLog[2][pos+4] + " " +  dataLog[3][pos+4] + " "  + dataLog[4][pos+4] + " "  + dataLog[5][pos+4]);
+      myFile.println(dataLog[0][pos+5] + " "  + dataLog[1][pos+5] + " "  + dataLog[2][pos+5] + " " +  dataLog[3][pos+5] + " "  + dataLog[4][pos+5] + " "  + dataLog[5][pos+5]);
+      myFile.println(dataLog[0][pos+6] + " "  + dataLog[1][pos+6] + " "  + dataLog[2][pos+6] + " " +  dataLog[3][pos+6] + " "  + dataLog[4][pos+6] + " "  + dataLog[5][pos+6]);
+      myFile.println(dataLog[0][pos+7] + " "  + dataLog[1][pos+7] + " "  + dataLog[2][pos+7] + " " +  dataLog[3][pos+7] + " "  + dataLog[4][pos+7] + " "  + dataLog[5][pos+7]);
+      myFile.println(dataLog[0][pos+8] + " "  + dataLog[1][pos+8] + " "  + dataLog[2][pos+8] + " " +  dataLog[3][pos+8] + " "  + dataLog[4][pos+8] + " "  + dataLog[5][pos+8]);
+      myFile.println(dataLog[0][pos+9] + " "  + dataLog[1][pos+9] + " "  + dataLog[2][pos+9] + " " +  dataLog[3][pos+9] + " "  + dataLog[4][pos+9] + " "  + dataLog[5][pos+9]);
+
+      pos = 60;
+      myFile.println(dataLog[0][pos+0] + " "  + dataLog[1][pos+0] + " "  + dataLog[2][pos+0] + " " +  dataLog[3][pos+0] + " "  + dataLog[4][pos+0] + " "  + dataLog[5][pos+0]);
+      myFile.println(dataLog[0][pos+1] + " "  + dataLog[1][pos+1] + " "  + dataLog[2][pos+1] + " " +  dataLog[3][pos+1] + " "  + dataLog[4][pos+1] + " "  + dataLog[5][pos+1]);
+      myFile.println(dataLog[0][pos+2] + " "  + dataLog[1][pos+2] + " "  + dataLog[2][pos+2] + " " +  dataLog[3][pos+2] + " "  + dataLog[4][pos+2] + " "  + dataLog[5][pos+2]);
+      myFile.println(dataLog[0][pos+3] + " "  + dataLog[1][pos+3] + " "  + dataLog[2][pos+3] + " " +  dataLog[3][pos+3] + " "  + dataLog[4][pos+3] + " "  + dataLog[5][pos+3]);
+      myFile.println(dataLog[0][pos+4] + " "  + dataLog[1][pos+4] + " "  + dataLog[2][pos+4] + " " +  dataLog[3][pos+4] + " "  + dataLog[4][pos+4] + " "  + dataLog[5][pos+4]);
+      myFile.println(dataLog[0][pos+5] + " "  + dataLog[1][pos+5] + " "  + dataLog[2][pos+5] + " " +  dataLog[3][pos+5] + " "  + dataLog[4][pos+5] + " "  + dataLog[5][pos+5]);
+      myFile.println(dataLog[0][pos+6] + " "  + dataLog[1][pos+6] + " "  + dataLog[2][pos+6] + " " +  dataLog[3][pos+6] + " "  + dataLog[4][pos+6] + " "  + dataLog[5][pos+6]);
+      myFile.println(dataLog[0][pos+7] + " "  + dataLog[1][pos+7] + " "  + dataLog[2][pos+7] + " " +  dataLog[3][pos+7] + " "  + dataLog[4][pos+7] + " "  + dataLog[5][pos+7]);
+      myFile.println(dataLog[0][pos+8] + " "  + dataLog[1][pos+8] + " "  + dataLog[2][pos+8] + " " +  dataLog[3][pos+8] + " "  + dataLog[4][pos+8] + " "  + dataLog[5][pos+8]);
+      myFile.println(dataLog[0][pos+9] + " "  + dataLog[1][pos+9] + " "  + dataLog[2][pos+9] + " " +  dataLog[3][pos+9] + " "  + dataLog[4][pos+9] + " "  + dataLog[5][pos+9]);
+
+      pos = 70;
+      myFile.println(dataLog[0][pos+0] + " "  + dataLog[1][pos+0] + " "  + dataLog[2][pos+0] + " " +  dataLog[3][pos+0] + " "  + dataLog[4][pos+0] + " "  + dataLog[5][pos+0]);
+      myFile.println(dataLog[0][pos+1] + " "  + dataLog[1][pos+1] + " "  + dataLog[2][pos+1] + " " +  dataLog[3][pos+1] + " "  + dataLog[4][pos+1] + " "  + dataLog[5][pos+1]);
+      myFile.println(dataLog[0][pos+2] + " "  + dataLog[1][pos+2] + " "  + dataLog[2][pos+2] + " " +  dataLog[3][pos+2] + " "  + dataLog[4][pos+2] + " "  + dataLog[5][pos+2]);
+      myFile.println(dataLog[0][pos+3] + " "  + dataLog[1][pos+3] + " "  + dataLog[2][pos+3] + " " +  dataLog[3][pos+3] + " "  + dataLog[4][pos+3] + " "  + dataLog[5][pos+3]);
+      myFile.println(dataLog[0][pos+4] + " "  + dataLog[1][pos+4] + " "  + dataLog[2][pos+4] + " " +  dataLog[3][pos+4] + " "  + dataLog[4][pos+4] + " "  + dataLog[5][pos+4]);
+      myFile.println(dataLog[0][pos+5] + " "  + dataLog[1][pos+5] + " "  + dataLog[2][pos+5] + " " +  dataLog[3][pos+5] + " "  + dataLog[4][pos+5] + " "  + dataLog[5][pos+5]);
+      myFile.println(dataLog[0][pos+6] + " "  + dataLog[1][pos+6] + " "  + dataLog[2][pos+6] + " " +  dataLog[3][pos+6] + " "  + dataLog[4][pos+6] + " "  + dataLog[5][pos+6]);
+      myFile.println(dataLog[0][pos+7] + " "  + dataLog[1][pos+7] + " "  + dataLog[2][pos+7] + " " +  dataLog[3][pos+7] + " "  + dataLog[4][pos+7] + " "  + dataLog[5][pos+7]);
+      myFile.println(dataLog[0][pos+8] + " "  + dataLog[1][pos+8] + " "  + dataLog[2][pos+8] + " " +  dataLog[3][pos+8] + " "  + dataLog[4][pos+8] + " "  + dataLog[5][pos+8]);
+      myFile.println(dataLog[0][pos+9] + " "  + dataLog[1][pos+9] + " "  + dataLog[2][pos+9] + " " +  dataLog[3][pos+9] + " "  + dataLog[4][pos+9] + " "  + dataLog[5][pos+9]);
+
+      pos = 80;
+      myFile.println(dataLog[0][pos+0] + " "  + dataLog[1][pos+0] + " "  + dataLog[2][pos+0] + " " +  dataLog[3][pos+0] + " "  + dataLog[4][pos+0] + " "  + dataLog[5][pos+0]);
+      myFile.println(dataLog[0][pos+1] + " "  + dataLog[1][pos+1] + " "  + dataLog[2][pos+1] + " " +  dataLog[3][pos+1] + " "  + dataLog[4][pos+1] + " "  + dataLog[5][pos+1]);
+      myFile.println(dataLog[0][pos+2] + " "  + dataLog[1][pos+2] + " "  + dataLog[2][pos+2] + " " +  dataLog[3][pos+2] + " "  + dataLog[4][pos+2] + " "  + dataLog[5][pos+2]);
+      myFile.println(dataLog[0][pos+3] + " "  + dataLog[1][pos+3] + " "  + dataLog[2][pos+3] + " " +  dataLog[3][pos+3] + " "  + dataLog[4][pos+3] + " "  + dataLog[5][pos+3]);
+      myFile.println(dataLog[0][pos+4] + " "  + dataLog[1][pos+4] + " "  + dataLog[2][pos+4] + " " +  dataLog[3][pos+4] + " "  + dataLog[4][pos+4] + " "  + dataLog[5][pos+4]);
+      myFile.println(dataLog[0][pos+5] + " "  + dataLog[1][pos+5] + " "  + dataLog[2][pos+5] + " " +  dataLog[3][pos+5] + " "  + dataLog[4][pos+5] + " "  + dataLog[5][pos+5]);
+      myFile.println(dataLog[0][pos+6] + " "  + dataLog[1][pos+6] + " "  + dataLog[2][pos+6] + " " +  dataLog[3][pos+6] + " "  + dataLog[4][pos+6] + " "  + dataLog[5][pos+6]);
+      myFile.println(dataLog[0][pos+7] + " "  + dataLog[1][pos+7] + " "  + dataLog[2][pos+7] + " " +  dataLog[3][pos+7] + " "  + dataLog[4][pos+7] + " "  + dataLog[5][pos+7]);
+      myFile.println(dataLog[0][pos+8] + " "  + dataLog[1][pos+8] + " "  + dataLog[2][pos+8] + " " +  dataLog[3][pos+8] + " "  + dataLog[4][pos+8] + " "  + dataLog[5][pos+8]);
+      myFile.println(dataLog[0][pos+9] + " "  + dataLog[1][pos+9] + " "  + dataLog[2][pos+9] + " " +  dataLog[3][pos+9] + " "  + dataLog[4][pos+9] + " "  + dataLog[5][pos+9]);
+
+      pos = 90;
+      myFile.println(dataLog[0][pos+0] + " "  + dataLog[1][pos+0] + " "  + dataLog[2][pos+0] + " " +  dataLog[3][pos+0] + " "  + dataLog[4][pos+0] + " "  + dataLog[5][pos+0]);
+      myFile.println(dataLog[0][pos+1] + " "  + dataLog[1][pos+1] + " "  + dataLog[2][pos+1] + " " +  dataLog[3][pos+1] + " "  + dataLog[4][pos+1] + " "  + dataLog[5][pos+1]);
+      myFile.println(dataLog[0][pos+2] + " "  + dataLog[1][pos+2] + " "  + dataLog[2][pos+2] + " " +  dataLog[3][pos+2] + " "  + dataLog[4][pos+2] + " "  + dataLog[5][pos+2]);
+      myFile.println(dataLog[0][pos+3] + " "  + dataLog[1][pos+3] + " "  + dataLog[2][pos+3] + " " +  dataLog[3][pos+3] + " "  + dataLog[4][pos+3] + " "  + dataLog[5][pos+3]);
+      myFile.println(dataLog[0][pos+4] + " "  + dataLog[1][pos+4] + " "  + dataLog[2][pos+4] + " " +  dataLog[3][pos+4] + " "  + dataLog[4][pos+4] + " "  + dataLog[5][pos+4]);
+      myFile.println(dataLog[0][pos+5] + " "  + dataLog[1][pos+5] + " "  + dataLog[2][pos+5] + " " +  dataLog[3][pos+5] + " "  + dataLog[4][pos+5] + " "  + dataLog[5][pos+5]);
+      myFile.println(dataLog[0][pos+6] + " "  + dataLog[1][pos+6] + " "  + dataLog[2][pos+6] + " " +  dataLog[3][pos+6] + " "  + dataLog[4][pos+6] + " "  + dataLog[5][pos+6]);
+      myFile.println(dataLog[0][pos+7] + " "  + dataLog[1][pos+7] + " "  + dataLog[2][pos+7] + " " +  dataLog[3][pos+7] + " "  + dataLog[4][pos+7] + " "  + dataLog[5][pos+7]);
+      myFile.println(dataLog[0][pos+8] + " "  + dataLog[1][pos+8] + " "  + dataLog[2][pos+8] + " " +  dataLog[3][pos+8] + " "  + dataLog[4][pos+8] + " "  + dataLog[5][pos+8]);
+      myFile.println(dataLog[0][pos+9] + " "  + dataLog[1][pos+9] + " "  + dataLog[2][pos+9] + " " +  dataLog[3][pos+9] + " "  + dataLog[4][pos+9] + " "  + dataLog[5][pos+9]);
       
       Serial.println("Done.");
       M5.Lcd.setTextColor(WHITE , BLACK);
       M5.Lcd.setCursor(100, 220);
       M5.Lcd.print("Save Done");
-      //saveState = 0;
-    } else {
+//      CountSave = 0;
+//      saveState = 0;
+    } 
+    else 
+    {
+      M5.Lcd.setTextColor(WHITE , BLACK);
+      M5.Lcd.setCursor(100, 220);
+      M5.Lcd.print("Error Opening");
       Serial.println("error opening");
     }
   }
   delay(1);
-}
+ }
