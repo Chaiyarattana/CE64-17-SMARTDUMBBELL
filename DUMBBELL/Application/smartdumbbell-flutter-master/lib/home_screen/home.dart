@@ -154,239 +154,247 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       child: Column(
         children: <Widget>[
-          //Body Container
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                        child: Container(
-                          width: 150,
-                          height: 75,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(21),
-                              topRight: Radius.circular(21),
-                              bottomLeft: Radius.circular(21),
-                              bottomRight: Radius.circular(21),
-                            ),
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                            border: Border.all(
-                              color: Color.fromRGBO(0, 0, 0, 1),
-                              width: 2,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(21),
-                          topRight: Radius.circular(21),
-                          bottomLeft: Radius.circular(21),
-                          bottomRight: Radius.circular(21),
-                        ),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "https://cdn.discordapp.com/attachments/895866960129179758/968040277321338930/unknown.png"),
-                            fit: BoxFit.cover)),
-                    margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                    child: Container(
-                      width: 500,
-                      height: 175,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 15.0, bottom: 15.0, left: 30.0),
+                child: Container(
+                  width: 150,
+                  height: 75,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(21),
+                      topRight: Radius.circular(21),
+                      bottomLeft: Radius.circular(21),
+                      bottomRight: Radius.circular(21),
+                    ),
+                    color: Color.fromRGBO(255, 255, 255, 1),
+                    border: Border.all(
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                      width: 2,
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(21),
-                                    topRight: Radius.circular(21),
-                                    bottomLeft: Radius.circular(21),
-                                    bottomRight: Radius.circular(21),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.6),
-                                      spreadRadius: 4,
-                                      blurRadius: 2,
-                                      offset: Offset(0, 1),
-                                    ),
-                                  ],
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          "https://cdn.discordapp.com/attachments/895866960129179758/968051981233029140/Screenshot_2022-04-25-14-29-22-19.jpg"),
-                                      fit: BoxFit.cover)),
-                              margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                              child: Container(
-                                width: 160,
-                                height: 160,
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    'ARM',
-                                    // maxLines: 10,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      height: 2,
-                                      fontWeight: FontWeight.bold,
-                                      backgroundColor: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 40,
-                              height: 40,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(21),
-                                    topRight: Radius.circular(21),
-                                    bottomLeft: Radius.circular(21),
-                                    bottomRight: Radius.circular(21),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.6),
-                                      spreadRadius: 4,
-                                      blurRadius: 2,
-                                      offset: Offset(0, 1),
-                                    ),
-                                  ],
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          "https://cdn.discordapp.com/attachments/895866960129179758/968051981497298974/Screenshot_2022-04-25-14-28-30-26.jpg"),
-                                      fit: BoxFit.cover)),
-                              margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                              child: Container(
-                                width: 160,
-                                height: 160,
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    'CHEST',
-                                    maxLines: 10,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      height: 2,
-                                      fontWeight: FontWeight.bold,
-                                      backgroundColor: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ]),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(21),
-                                    topRight: Radius.circular(21),
-                                    bottomLeft: Radius.circular(21),
-                                    bottomRight: Radius.circular(21),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.6),
-                                      spreadRadius: 4,
-                                      blurRadius: 2,
-                                      offset: Offset(0, 1),
-                                    ),
-                                  ],
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          "https://cdn.discordapp.com/attachments/895866960129179758/968051982021566495/Screenshot_2022-04-25-14-26-45-09.jpg"),
-                                      fit: BoxFit.cover)),
-                              margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                              child: Container(
-                                width: 160,
-                                height: 160,
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    'SHOULDER',
-                                    // maxLines: 10,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      height: 2,
-                                      fontWeight: FontWeight.bold,
-                                      backgroundColor: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 40,
-                              height: 40,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(21),
-                                    topRight: Radius.circular(21),
-                                    bottomLeft: Radius.circular(21),
-                                    bottomRight: Radius.circular(21),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.6),
-                                      spreadRadius: 4,
-                                      blurRadius: 2,
-                                      offset: Offset(0, 1),
-                                    ),
-                                  ],
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          "https://cdn.discordapp.com/attachments/895866960129179758/968051981690224670/Screenshot_2022-04-25-14-27-22-17.jpg"),
-                                      fit: BoxFit.cover)),
-                              margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                              child: Container(
-                                width: 160,
-                                height: 160,
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    'BACK',
-                                    // maxLines: 10,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      height: 2,
-                                      fontWeight: FontWeight.bold,
-                                      backgroundColor: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ])
-                    ],
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
+          ),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(21),
+                  topRight: Radius.circular(21),
+                  bottomLeft: Radius.circular(21),
+                  bottomRight: Radius.circular(21),
+                ),
+                image: DecorationImage(
+                  image: AssetImage('assets/gesture/StartPic.png'),
+                  fit: BoxFit.fitWidth,
+                )
+                // image: DecorationImage(
+                //     image: NetworkImage(
+                //         "https://cdn.discordapp.com/attachments/895866960129179758/968040277321338930/unknown.png"),
+                //     fit: BoxFit.cover)
+                ),
+            margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
+            child: Container(width: 375, height: 175),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(21),
+                        topRight: Radius.circular(21),
+                        bottomLeft: Radius.circular(21),
+                        bottomRight: Radius.circular(21),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.6),
+                          spreadRadius: 4,
+                          blurRadius: 2,
+                          offset: Offset(0, 1),
+                        ),
+                      ],
+                      image: DecorationImage(
+                        image: AssetImage('assets/gesture/Arm.jpg'),
+                        fit: BoxFit.fitWidth,
+                      )
+                      // image: DecorationImage(
+                      //     image: NetworkImage(
+                      //         "https://cdn.discordapp.com/attachments/895866960129179758/968051981233029140/Screenshot_2022-04-25-14-29-22-19.jpg"),
+                      //     fit: BoxFit.cover)
+                      ),
+                  margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                  child: Container(
+                    width: 160,
+                    height: 160,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        'ARM',
+                        // maxLines: 10,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          height: 2,
+                          fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 40,
+                  height: 40,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(21),
+                        topRight: Radius.circular(21),
+                        bottomLeft: Radius.circular(21),
+                        bottomRight: Radius.circular(21),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.6),
+                          spreadRadius: 4,
+                          blurRadius: 2,
+                          offset: Offset(0, 1),
+                        ),
+                      ],
+                      image: DecorationImage(
+                        image: AssetImage('assets/gesture/Chest.jpg'),
+                        fit: BoxFit.fitWidth,
+                      )
+                      // image: DecorationImage(
+                      //     image: NetworkImage(
+                      //         "https://cdn.discordapp.com/attachments/895866960129179758/968051981497298974/Screenshot_2022-04-25-14-28-30-26.jpg"),
+                      //     fit: BoxFit.cover)
+                      ),
+                  margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                  child: Container(
+                    width: 160,
+                    height: 160,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        'CHEST',
+                        maxLines: 10,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          height: 2,
+                          fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(21),
+                        topRight: Radius.circular(21),
+                        bottomLeft: Radius.circular(21),
+                        bottomRight: Radius.circular(21),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.6),
+                          spreadRadius: 4,
+                          blurRadius: 2,
+                          offset: Offset(0, 1),
+                        ),
+                      ],
+                      image: DecorationImage(
+                        image: AssetImage('assets/gesture/Shoulder.jpg'),
+                        fit: BoxFit.fitWidth,
+                      )
+                      // image: DecorationImage(
+                      //     image: NetworkImage(
+                      //         "https://cdn.discordapp.com/attachments/895866960129179758/968051982021566495/Screenshot_2022-04-25-14-26-45-09.jpg"),
+                      //     fit: BoxFit.cover)
+                      ),
+                  margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                  child: Container(
+                    width: 160,
+                    height: 160,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        'SHOULDER',
+                        // maxLines: 10,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          height: 2,
+                          fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 40,
+                  height: 40,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(21),
+                        topRight: Radius.circular(21),
+                        bottomLeft: Radius.circular(21),
+                        bottomRight: Radius.circular(21),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.6),
+                          spreadRadius: 4,
+                          blurRadius: 2,
+                          offset: Offset(0, 1),
+                        ),
+                      ],
+                      image: DecorationImage(
+                        image: AssetImage('assets/gesture/Back.jpg'),
+                        fit: BoxFit.fitWidth,
+                      )
+                      // image: DecorationImage(
+                      //     image: NetworkImage(
+                      //         "https://cdn.discordapp.com/attachments/895866960129179758/968051981690224670/Screenshot_2022-04-25-14-27-22-17.jpg"),
+                      //     fit: BoxFit.cover)
+                      ),
+                  margin: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                  child: Container(
+                    width: 160,
+                    height: 160,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        'BACK',
+                        // maxLines: 10,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          height: 2,
+                          fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ])
+            ],
           ),
         ],
       ),
