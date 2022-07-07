@@ -197,11 +197,11 @@ void loop()
     }
     else if(msgUse == "2") //Biceps Curl
     {
-      if(roll >= -100 && roll <= -55 && pitch >= -20 && pitch <= 50 &&  gyroX >= -300 && gyroX <= 250)
+      if(roll >= -100 && roll <= -35 && pitch >= -20 && pitch <= 50 &&  gyroX >= -300 && gyroX <= 250)
       {
          saveState = 1;        
       }
-      if(roll >= 90 && roll <= 110 && pitch >= -20 && pitch <= 50 &&  gyroX >= -300 && gyroX <= 250)
+      if(roll >= 35 && roll <= 90 && pitch >= -20 && pitch <= 50 &&  gyroX >= -300 && gyroX <= 250)
        {
         if(saveState == 1)
         {
@@ -253,15 +253,15 @@ void loop()
     }
     else if(msgUse == "4") // front_Raise
     {
-      if(roll >= -170 && roll <= -100 && pitch >= -30 && pitch <= 50 &&  gyroX >= 90 && gyroX <= 180 && saveState == 0)
+      if(roll >= -170 && roll <= -100 && pitch >= -30 && pitch <= 50 &&   saveState == 0)
       {
         saveState = 1;        
       }
-      else if(roll >= 150 && roll <= 190 && pitch >= -30 && pitch <= 50 && gyroX >= -150 && gyroX <= -70 && saveState == 1)
+      else if(roll >= 150 && roll <= 190 && pitch >= -30 && pitch <= 50 &&  saveState == 1)
       {    
         saveState = 2;
       }
-      else if(roll >= -170 && roll <= -100 && pitch >= -30 && pitch <= 50 &&  gyroX >= 90 && gyroX <= 180 && saveState == 2)
+      else if(roll >= -170 && roll <= -100 && pitch >= -30 && pitch <= 50 &&  saveState == 2)
       {    
           CountSave += 1;
           String str = String(CountSave);
@@ -281,15 +281,15 @@ void loop()
     }
     else if(msgUse == "5") //Bent_Over_Row
     {
-      if(accX >= 0 && roll <= 0.4 && accY >= -1.2 && accY <= -1 &&  gyroZ >= 20 && gyroZ <= 70 && saveState == 0)
-      {
-        saveState = 1;        
-      }
-      else if(accX >= 0.5 && accX <= 1 && accY >= -0.8 && accY <= -0.2 && gyroZ >= -100 && gyroZ <= -20 && saveState == 1)
-      {    
-        saveState = 2;
-      }
-      else if(accX >= 0 && roll <= 0.4 && accY >= -1.2 && accY <= -1 &&  gyroZ >= 20 && gyroZ <= 70 && saveState == 2)
+       if(accX >= 0 && roll <= 0.4 && accY >= -1.5 && accY <= -0.5 &&  gyroZ >= 20 && gyroZ <= 70 && saveState == 0)
+    {
+    saveState = 1;        
+    }
+       else if(accX >= 0.5 && accX <= 1.5 && accY >= -0.8 && accY <= 0.3 && gyroZ >= -100 && gyroZ <= -20 && saveState == 1)
+    {    
+    saveState = 2;
+    }
+       else if(accX >= 0 && roll <= 0.4 && accY >= -1.2 && accY <= -1 &&  gyroZ >= 20 && gyroZ <= 70 && saveState == 2)
       {    
           CountSave += 1;
           String str = String(CountSave);
@@ -343,6 +343,11 @@ void loop()
             previousMillis_Save = currentMillis;
           }
         }
+    }
+    else if(msgUse == "9") //ClearData
+    {
+        saveState = 0;
+        CountSave = 0;
     }
     else
     {
